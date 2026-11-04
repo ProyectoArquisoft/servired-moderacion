@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: servired-moderacion
+  mvc:
+    # Anonimato: nunca registrar parámetros ni headers de la petición, ni siquiera con DEBUG.
+    log-request-details: false
+    log-resolved-exception: false
+  web:
+    # Idioma fijo: los mensajes no dependen del header Accept-Language del cliente.
+    locale: es
+    locale-resolver: fixed
+    error:
+      include-exception: false
+      include-message: never
+      include-stacktrace: never
+      include-binding-errors: never
+      include-path: never
+      whitelabel:
+        enabled: false
+
+server:
+  port: 8082
+  # Anonimato: X-Forwarded-* y Forwarded no se interpretan, y no hay registro de accesos.
+  forward-headers-strategy: none
+  tomcat:
+    accesslog:
+      enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+
+logging:
+  level:
+    # Estos paquetes pueden copiar partes de la petición al log, sobre todo con peticiones malformadas.
+    org.springframework.web: WARN
+    org.apache.coyote: ERROR
+    org.apache.catalina.connector: ERROR
+    org.apache.tomcat.util.http: ERROR
