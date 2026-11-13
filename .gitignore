@@ -6,3 +6,6 @@ target/
 .vscode/
 *.iml
 *.log
+
+# Extensión de VS Code (GitHub Copilot app modernization)
+.github/modernize/
